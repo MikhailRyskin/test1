@@ -1,0 +1,237 @@
+
+файл 1
+
+def interests_surnames_length(stud_dict):
+    interests_list = []
+    total_surnames_length = 0
+    for stud_data in stud_dict.values():
+        interests_list.extend(stud_data['interests'])
+        total_surnames_length += len(stud_data['surname'])
+    return interests_list, total_surnames_length
+
+
+students = {
+    1: {
+        'name': 'Bob',
+        'surname': 'Vazovski',
+        'age': 23,
+        'interests': ['biology', 'swimming']
+    },
+    2: {
+        'name': 'Rob',
+        'surname': 'Stepanov',
+        'age': 24,
+        'interests': ['math', 'computer games', 'running']
+    },
+    3: {
+        'name': 'Alexander',
+        'surname': 'Krug',
+        'age': 22,
+        'interests': ['languages', 'health food']
+    }
+}
+
+# def f(dict):
+#     lst = []
+#     string = ''
+#     for i in dict:
+#         lst += (dict[i]['interests'])
+#         string += dict[i]['surname']
+#     cnt = 0
+#     for s in string:
+#         cnt += 1
+#     return lst, cnt
+#
+#
+# pairs = []
+# for i in students:
+#     pairs += (i, students[i]['age'])
+# print(pairs)
+#
+# my_lst = f(students)[0]
+# l = f(students)[1]
+# print(my_lst, l)
+
+for students_id, students_data in students.items():
+    students_age = students_data['age']
+    print(f'ID студента: {students_id} возраст студента: {students_age}')
+
+students_interests, surnames_length = interests_surnames_length(students)
+print('Полный список интересов всех студентов:', students_interests)
+print('Общая длина всех фамилий студентов:', surnames_length)
+
+# зачёт!
+# зачёт!
+****************************************
+файл 2
+
+import math
+
+
+def min_divider(number):
+    min_divider = number
+    for k in range(2, int(math.sqrt(number)) + 1):
+        if number % k == 0:
+            min_divider = k
+            break
+    return min_divider
+
+
+def is_prime(number):
+    prime = True
+    min_div = min_divider(number)
+    if min_div != number or min_div == 2:
+        prime = False
+    return prime
+
+
+def cryptographic_func(inp_data):
+    return [data for index, data in enumerate(inp_data) if is_prime(index)]
+
+
+input_data = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+input_data_1 = 'абвгдеёжз'
+
+crypt_list = cryptographic_func(input_data)
+print(crypt_list)
+crypt_list_1 = cryptographic_func(input_data_1)
+print(crypt_list_1)
+
+# зачёт!
+****************************************
+файл 3
+
+def func_2003(inp_tuple, element):
+    if element not in inp_tuple:
+        new_tuple = ()
+    else:
+        start_index = inp_tuple.index(element)
+        if inp_tuple.count(element) == 1:
+            new_tuple = inp_tuple[start_index:]
+        else:
+            end_index = start_index + 1 + inp_tuple[start_index + 1:].index(element)
+            new_tuple = inp_tuple[start_index:end_index + 1]
+    return new_tuple
+
+
+input_tuple = ('1', '2', '3', '8', '3', '6', '8', '2', '3', '9')
+input_element = input('Введите элемент: ')
+
+out_tuple = func_2003(input_tuple, input_element)
+print(out_tuple)
+
+# зачёт!
+****************************************
+файл 4
+
+players = {
+    ("Ivan", "Volkin"): (10, 5, 13),
+    ("Bob", "Robbin"): (7, 5, 14),
+    ("Rob", "Bobbin"): (12, 8, 2)
+}
+new_list = []
+for key, value in players.items():
+    new_list.append(key + value)
+print(new_list)
+
+# было бы здорово решить генератором списков =)
+# зачёт!
+****************************************
+файл 5
+
+people = {
+    ('Иванова', 'Кира'): 50,
+    ('Петров', 'Иван'): 40,
+    ('Сидоров', 'Никита'): 35,
+    ('Сидорова', 'Алина'): 34,
+    ('Петрова', 'Ольга'): 38,
+    ('Сидоров', 'Павел'): 10,
+}
+total_age = 0
+inp_surname = input('Введите фамилию: ').title()
+inp_fem_surname = inp_surname + 'а'
+for surname_name, age in people.items():
+    surname = surname_name[0]
+    if surname == inp_surname or surname == inp_fem_surname:
+        print(*surname_name, age)
+        total_age += age
+print('Общий возраст: ', total_age)
+
+# пожалуйста добавьте вывод ФИО и возраста людей, чьи фамилии были указаны во вводе пользователя.
+#  добавил. Да, неправильно прочитал условие.
+# зачёт!
+****************************************
+файл 6
+
+input_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+new_list = list(zip(input_list[::2], input_list[1::2]))
+print('Новый список:', new_list)
+
+new_list_1 = []
+for index in range(0, len(input_list), 2):
+    new_list_1.append((input_list[index], input_list[index + 1]))
+print('Новый список:', new_list_1)
+
+# зачёт!
+****************************************
+файл 7
+
+def tuple_sorted(input_tuple):
+    for number in input_tuple:
+        if number % 1 != 0:
+            return input_tuple
+    new_list = list(input_tuple)
+    new_list.sort()
+    sort_tuple = tuple(new_list)
+    return sort_tuple
+
+
+my_tuple = (23, 45, 2, 56, -127, 15, 4, 76, 1, -3)
+# my_tuple = (23, 45, 2, 56.54, 4, 76, 1, -3)
+
+my_sort_tuple = tuple_sorted(my_tuple)
+print(my_sort_tuple)
+
+# зачёт!
+****************************************
+файл 8
+
+phone_book = {}
+while True:
+    choice = int(input('Выберите действие: 1 - добавить контакт, 2 - поиск человека по фамилии, 3 - выход: '))
+    if choice == 3:
+        print('Выход')
+        break
+    elif choice == 1:
+        surname = input('Введите фамилию: ').title()
+        name = input('Введите имя: ').title()
+        person = (surname, name)
+        if person not in phone_book:
+            phone_number = int(input('Введите номер телефона: '))
+            phone_book[person] = phone_number
+        else:
+            print('Контакт уже есть в книге')
+        print(phone_book)
+    elif choice == 2:
+        surname = input('Введите фамилию: ').title()
+        number_found = 0
+        for person, phone_number in phone_book.items():
+            if surname == person[0]:
+                print(person, phone_number)
+                number_found += 1
+        if number_found == 0:
+            print('Такой фамилии нет в телефонной книге')
+    else:
+        print('Неверное действие!')
+
+# зачёт!
+****************************************
+файл 9
+
+# TODO здесь писать код
+****************************************
+файл 10
+
+# TODO здесь писать код
+****************************************
